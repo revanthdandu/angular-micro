@@ -1,0 +1,338 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"ignio": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/ignio",
+			"sourceRoot": "projects/ignio/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/ignio",
+						"index": "projects/ignio/src/index.html",
+						"main": "projects/ignio/src/main.ts",
+						"polyfills": "projects/ignio/src/polyfills.ts",
+						"tsConfig": "projects/ignio/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/ignio/src/favicon.ico",
+							"projects/ignio/src/assets"
+						],
+						"styles": [
+							"projects/ignio-buildscrippts/src/app/app.component.scss",
+							"projects/ignio/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/ignio/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/ignio/src/environments/environment.ts",
+									"with": "projects/ignio/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/ignio/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "ignio:build:production",
+							"extraWebpackConfig": "projects/ignio/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "ignio:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/ignio/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "ignio:build",
+						"extraWebpackConfig": "projects/ignio/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/ignio/src/test.ts",
+						"polyfills": "projects/ignio/src/polyfills.ts",
+						"tsConfig": "projects/ignio/tsconfig.spec.json",
+						"karmaConfig": "projects/ignio/karma.conf.js",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/ignio/src/favicon.ico",
+							"projects/ignio/src/assets"
+						],
+						"styles": [
+							"projects/ignio/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"ignio-buildscrippts": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/ignio-buildscrippts",
+			"sourceRoot": "projects/ignio-buildscrippts/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/ignio-buildscrippts",
+						"index": "projects/ignio-buildscrippts/src/index.html",
+						"main": "projects/ignio-buildscrippts/src/main.ts",
+						"polyfills": "projects/ignio-buildscrippts/src/polyfills.ts",
+						"tsConfig": "projects/ignio-buildscrippts/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/ignio-buildscrippts/src/favicon.ico",
+							"projects/ignio-buildscrippts/src/assets"
+						],
+						"styles": [
+							"projects/ignio-buildscrippts/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/ignio-buildscrippts/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/ignio-buildscrippts/src/environments/environment.ts",
+									"with": "projects/ignio-buildscrippts/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/ignio-buildscrippts/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "ignio-buildscrippts:build:production",
+							"extraWebpackConfig": "projects/ignio-buildscrippts/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "ignio-buildscrippts:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4201,
+						"publicHost": "http://localhost:4201",
+						"extraWebpackConfig": "projects/ignio-buildscrippts/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "ignio-buildscrippts:build",
+						"extraWebpackConfig": "projects/ignio-buildscrippts/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/ignio-buildscrippts/src/test.ts",
+						"polyfills": "projects/ignio-buildscrippts/src/polyfills.ts",
+						"tsConfig": "projects/ignio-buildscrippts/tsconfig.spec.json",
+						"karmaConfig": "projects/ignio-buildscrippts/karma.conf.js",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/ignio-buildscrippts/src/favicon.ico",
+							"projects/ignio-buildscrippts/src/assets"
+						],
+						"styles": [
+							"projects/ignio-buildscrippts/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"core-components": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/core-components",
+			"sourceRoot": "projects/core-components/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/core-components",
+						"index": "projects/core-components/src/index.html",
+						"main": "projects/core-components/src/main.ts",
+						"polyfills": "projects/core-components/src/polyfills.ts",
+						"tsConfig": "projects/core-components/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/core-components/src/favicon.ico",
+							"projects/core-components/src/assets"
+						],
+						"styles": [
+							"projects/core-components/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/core-components/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/core-components/src/environments/environment.ts",
+									"with": "projects/core-components/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/core-components/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "core-components:build:production",
+							"extraWebpackConfig": "projects/core-components/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "core-components:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4202,
+						"publicHost": "http://localhost:4202",
+						"extraWebpackConfig": "projects/core-components/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "core-components:build",
+						"extraWebpackConfig": "projects/core-components/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/core-components/src/test.ts",
+						"polyfills": "projects/core-components/src/polyfills.ts",
+						"tsConfig": "projects/core-components/tsconfig.spec.json",
+						"karmaConfig": "projects/core-components/karma.conf.js",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/core-components/src/favicon.ico",
+							"projects/core-components/src/assets"
+						],
+						"styles": [
+							"projects/core-components/src/styles.scss"
+						],
+						"scripts": []
+					}
+				}
+			}
+		}
+	}
+}
